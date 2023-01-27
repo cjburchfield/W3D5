@@ -44,8 +44,7 @@ describe PolyTreeNode do
 
     it "handles nil without issue" do
       node2.parent = nil
-      expect(node2.parent).to begit pull
-      _nil
+      expect(node2.parent).to begit_nil
     end
 
     context "when reassigning" do
