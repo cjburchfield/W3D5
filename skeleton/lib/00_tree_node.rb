@@ -4,6 +4,8 @@ class PolyTreeNode
         @parent = nil
         @children = []
     end
+
+    def value
         @value
     end
 
@@ -16,18 +18,25 @@ class PolyTreeNode
     end
 
     def parent=(new_parent)
-        if !self.parent.nil?
-            self.parent.children.remove(self)
+        if new_parent.nil?
+            self.parent.children.delete(self)
+            @parent = nil
+        # raise "Bad parent=!" if new_parent == nil
+        elsif !self.parent.nil?
+            self.parent.children.delete(self)
+            @parent = new_parent 
+            new_parent.children << self
         else
             @parent = new_parent 
             new_parent.children << self
+        end
 
 
-        parent.children.each do |child|
-            if self == child
+        # parent.children.each do |child|
+        #     if self == child
 
-        @parent = parent
-        parent.children << self 
+        # @parent = parent
+        # parent.children << self 
     end
 
 
