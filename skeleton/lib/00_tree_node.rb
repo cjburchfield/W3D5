@@ -21,7 +21,6 @@ class PolyTreeNode
         if new_parent.nil?
             self.parent.children.delete(self)
             @parent = nil
-        # raise "Bad parent=!" if new_parent == nil
         elsif !self.parent.nil?
             self.parent.children.delete(self)
             @parent = new_parent 
@@ -30,15 +29,14 @@ class PolyTreeNode
             @parent = new_parent 
             new_parent.children << self
         end
-
-
-        # parent.children.each do |child|
-        #     if self == child
-
-        # @parent = parent
-        # parent.children << self 
     end
 
+    def add_child(child_node)
+        child_node.parent=(self)
+    end
 
+    def remove_child(child_node)
+        child_node.parent=(nil)
+    end
         
 end
