@@ -25,16 +25,30 @@ class KnightPathFinder
         x, y = pos
         results = []
 
-       results << [x - 2, y + 1] if KnightPathFinder.valid?([x - 2, y + 1])
-        KnightPathFinder.valid?([x - 1, y + 2])
-        KnightPathFinder.valid?([x + 1, y + 2])
-        KnightPathFinder.valid?([x + 2, y + 1])
-        KnightPathFinder.valid?([x + 2, y - 1])
-        KnightPathFinder.valid?([x + 1, y - 2])
-        KnightPathFinder.valid?([x - 1, y - 2])
-        KnightPathFinder.valid?([x - 2, y - 1])
+        results << [x - 2, y + 1] if KnightPathFinder.valid?([x - 2, y + 1])
+        results << [x - 1, y + 2] if KnightPathFinder.valid?([x - 1, y + 2])
+        results << [x + 1, y + 2] if KnightPathFinder.valid?([x + 1, y + 2])
+        results << [x + 2, y + 1] if KnightPathFinder.valid?([x + 2, y + 1])
+        results << [x + 2, y - 1] if KnightPathFinder.valid?([x + 2, y - 1])
+        results << [x + 1, y - 2] if KnightPathFinder.valid?([x + 1, y - 2])
+        results << [x - 1, y - 2] if KnightPathFinder.valid?([x - 1, y - 2])
+        results << [x - 2, y - 1] if KnightPathFinder.valid?([x - 2, y - 1])
+
+        results
     end
 
+    # NOT YET TESTED!!!!!!
+    def new_move_positions(pos)
+        new_positions = []
+        @considered_positions
 
+        KnightPathFinder.valid_moves(pos).each do |pos|
+            if !@considered_positions.include?(pos)
+                new_positions << pos 
+                @considered_positions << pos
+            end
+        end
+        new_positions
+    end
     
 end
