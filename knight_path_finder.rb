@@ -78,11 +78,11 @@ class KnightPathFinder
     def trace_path_back(end_pos)
         results = []
         answered_node = find_path(end_pos)
-        until answered_node.parent == @initial_pos
+        until answered_node.parent.nil?
             results.unshift(answered_node.value)
-            answered_node = answered_node.parent if !answered_node.parent.nil?
+            answered_node = answered_node.parent
         end
-
+        
         results.unshift(@initial_pos.value)
     end
 
@@ -92,5 +92,7 @@ end
 
 # debugger
 tst = KnightPathFinder.new([0,0])
-p tst.trace_path_back([6,2])
-
+p tst.trace_path_back([7,6])
+# debugger
+# p tst.find_path([6,2])
+# tst.find_path([6,2]).children.each {|child| p child.value}
