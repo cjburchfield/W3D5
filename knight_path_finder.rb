@@ -10,6 +10,12 @@ class KnightPathFinder
         @initial_pos = KnightPathFinder.root_node(starting_pos)
         @considered_positions = [@initial_pos]
         self.build_move_tree
+        # count = 0
+        # @considered_positions.each do |node|
+        #     count += 1
+        #     p node.value
+        # end
+        # puts count
     end
 
     # this is the iteration
@@ -43,7 +49,11 @@ class KnightPathFinder
         results << PolyTreeNode.new([x - 1, y - 2]) if KnightPathFinder.valid?([x - 1, y - 2])
         results << PolyTreeNode.new([x - 2, y - 1]) if KnightPathFinder.valid?([x - 2, y - 1])
 
-        results = results.map { |node| node.parent=(pos) }
+        results.each do |node|
+            node.parent=(pos)
+        end
+        results
+        # results = results.map { |node| node.parent=(pos) }
     end
 
     # this is a step
@@ -51,7 +61,7 @@ class KnightPathFinder
 
         new_positions = []
         KnightPathFinder.valid_moves(pos_node).each do |new_pos|
-            if !@considered_positions.include?(new_pos)
+            if @considered_positions.none? {|considered_node| considered_node.value == new_pos.value }
                 new_positions << new_pos
                 @considered_positions << new_pos
             end
@@ -72,6 +82,6 @@ class KnightPathFinder
     
 end
 
-debugger
+# debugger
 tst = KnightPathFinder.new([4,5])
 
