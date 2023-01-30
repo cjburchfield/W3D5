@@ -1,4 +1,5 @@
 require_relative "./skeleton/lib/00_tree_node.rb"
+require "byebug"
 
 class KnightPathFinder
     def self.root_node(pos)
@@ -7,7 +8,7 @@ class KnightPathFinder
 
     def initialize(starting_pos)
         @initial_pos = KnightPathFinder.root_node(starting_pos)
-        @considered_positions = [@initial_pos.value]
+        @considered_positions = [@initial_pos]
         self.build_move_tree
     end
 
@@ -30,26 +31,26 @@ class KnightPathFinder
     end
 
     def self.valid_moves(pos)
-        x, y = pos
+        x, y = pos.value
         results = []
 
-        results << [x - 2, y + 1] if KnightPathFinder.valid?([x - 2, y + 1])
-        results << [x - 1, y + 2] if KnightPathFinder.valid?([x - 1, y + 2])
-        results << [x + 1, y + 2] if KnightPathFinder.valid?([x + 1, y + 2])
-        results << [x + 2, y + 1] if KnightPathFinder.valid?([x + 2, y + 1])
-        results << [x + 2, y - 1] if KnightPathFinder.valid?([x + 2, y - 1])
-        results << [x + 1, y - 2] if KnightPathFinder.valid?([x + 1, y - 2])
-        results << [x - 1, y - 2] if KnightPathFinder.valid?([x - 1, y - 2])
-        results << [x - 2, y - 1] if KnightPathFinder.valid?([x - 2, y - 1])
+        results << PolyTreeNode.new([x - 2, y + 1]) if KnightPathFinder.valid?([x - 2, y + 1])
+        results << PolyTreeNode.new([x - 1, y + 2]) if KnightPathFinder.valid?([x - 1, y + 2])
+        results << PolyTreeNode.new([x + 1, y + 2]) if KnightPathFinder.valid?([x + 1, y + 2])
+        results << PolyTreeNode.new([x + 2, y + 1]) if KnightPathFinder.valid?([x + 2, y + 1])
+        results << PolyTreeNode.new([x + 2, y - 1]) if KnightPathFinder.valid?([x + 2, y - 1])
+        results << PolyTreeNode.new([x + 1, y - 2]) if KnightPathFinder.valid?([x + 1, y - 2])
+        results << PolyTreeNode.new([x - 1, y - 2]) if KnightPathFinder.valid?([x - 1, y - 2])
+        results << PolyTreeNode.new([x - 2, y - 1]) if KnightPathFinder.valid?([x - 2, y - 1])
 
-        results
+        results = results.map { |node| node.parent=(pos) }
     end
 
     # this is a step
-    def new_move_positions(pos)
+    def new_move_positions(pos_node)
 
         new_positions = []
-        KnightPathFinder.valid_moves(pos).each do |new_pos|
+        KnightPathFinder.valid_moves(pos_node).each do |new_pos|
             if !@considered_positions.include?(new_pos)
                 new_positions << new_pos
                 @considered_positions << new_pos
@@ -57,7 +58,20 @@ class KnightPathFinder
         end
         new_positions
     end
+
+
+    # def find_path(end_pos)
+    #     # return PolyTreeNode.new(end_pos) if end_pos == self
+    #     found_idx = @considered_positions.index(end_pos) 
+
+
+
+
+    # end
+
     
 end
 
+debugger
 tst = KnightPathFinder.new([4,5])
+
