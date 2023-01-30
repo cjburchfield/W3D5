@@ -70,14 +70,14 @@ class KnightPathFinder
     end
 
 
-    # def find_path(end_pos)
-    #     # return PolyTreeNode.new(end_pos) if end_pos == self
-    #     found_idx = @considered_positions.index(end_pos) 
+    def find_path(end_pos)
+        # return PolyTreeNode.new(end_pos) if end_pos == self
+        found_idx = @considered_positions.index(end_pos) 
 
 
 
 
-    # end
+    end
 
     
 end

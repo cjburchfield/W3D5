@@ -26,7 +26,7 @@ class PolyTreeNode
             @parent = new_parent 
             new_parent.children << self
         else
-            @parent = new_parent 
+            @paresent = new_parent 
             new_parent.children << self
         end
     end
